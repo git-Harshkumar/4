@@ -23,6 +23,9 @@ import { SurpriseQ1, SurpriseQ2, SurpriseQ3, SurpriseQ4, SurpriseQ5, SurpriseQ6 
 // NEW: Love Letter (emotional finale)
 import LoveLetter from './components/LoveLetter';
 
+// NEW: Continue Together toggle (the very last question)
+import ContinueToggle from './components/ContinueToggle';
+
 /**
  * 💕 Anniversary Website - 4 Months of Us — SUPERCHARGED EDITION
  *
@@ -154,6 +157,9 @@ function App() {
             {/* ═══════════ SECTION: Love Letter (hidden finale) ═══════════ */}
             {/* Reveals when user scrolls to the very bottom or after surprise */}
             <LoveLetter visible={true} />
+
+            {/* ═══════════ SECTION: Continue Together? (final toggle) ═══════════ */}
+            <ContinueToggle />
 
             {/* Footer */}
             <footer style={{

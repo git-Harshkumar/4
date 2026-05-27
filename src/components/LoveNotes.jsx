@@ -15,12 +15,12 @@ const notes = [
   {
     id: 3,
     front: 'Every moment with you feels like magic ✨',
-    back: 'Especially our late-night ice cream runs 🍦',
+    back: 'Especially when you are with me 🍦',
   },
   {
     id: 4,
     front: 'You make ordinary days extraordinary 🌟',
-    back: 'Even grocery shopping becomes an adventure 🛒',
+    back: 'when we run for mango shakep1🛒',
   },
   {
     id: 5,

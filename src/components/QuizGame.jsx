@@ -6,8 +6,8 @@ const QUESTIONS = [
     question: 'What is my most annoying habit? 😅',
     options: [
       'Overthinking everything 😅',
-      'Sending 47 texts in a row 📱',
-      'Eating your food 🍕',
+      'Sending texts in a row 📱',
+      'Irriating you 🍕',
       'All of the above 💀',
     ],
     correctIndex: 3,
@@ -29,7 +29,7 @@ const QUESTIONS = [
     options: [
       'Stalk your Instagram 👀',
       "Text you 'hey' 47 times 📱",
-      'Smell your hoodie 🧥',
+      'Sleep 😴',
       'All of the above and more 💀',
     ],
     correctIndex: 3,

@@ -1,30 +1,26 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 
 const timelineData = [
   {
     month: 'Month 1',
     caption: 'The day everything changed...',
-    // 🖼️ Replace with actual photo URL
-    image: null,
+    photos: ['/p12.jpeg', '/p6.jpeg', '/p7.jpeg'],
   },
   {
     month: 'Month 2',
     caption: 'We started building our world...',
-    // 🖼️ Replace with actual photo URL
-    image: null,
+    photos: ['/p2.jpeg', '/p3.jpeg'],
   },
   {
     month: 'Month 3',
     caption: 'Growing closer with every heartbeat...',
-    // 🖼️ Replace with actual photo URL
-    image: null,
+    photos: ['/p13.jpeg', '/p4.jpeg', '/p10.jpeg'],
   },
   {
     month: 'Month 4',
     caption: 'Four months and forever to go...',
-    // 🖼️ Replace with actual photo URL
-    image: null,
+    photos: ['/p1.jpeg', '/p10.jpeg', '/p11.jpeg'],
   },
 ];
 
@@ -40,7 +36,6 @@ export default function Timeline() {
     >
       {/* Section heading */}
       <motion.h2
-        className="gradient-text"
         style={{
           textAlign: 'center',
           fontSize: 'clamp(2rem, 5vw, 3rem)',
@@ -51,16 +46,14 @@ export default function Timeline() {
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
           backgroundClip: 'text',
+          fontFamily: "'Playfair Display', serif",
         }}
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
-        animate={{
-          backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-        }}
       >
-        Our Story 💕
+        Hello My Cutiest Chubby😁💕
       </motion.h2>
 
       <motion.p
@@ -71,6 +64,7 @@ export default function Timeline() {
           marginBottom: '60px',
           fontStyle: 'italic',
           letterSpacing: '0.3px',
+          fontFamily: "'Quicksand', sans-serif",
         }}
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -80,12 +74,8 @@ export default function Timeline() {
         Every moment with you is a memory I treasure
       </motion.p>
 
-      {/* Timeline vertical line */}
-      <div
-        style={{
-          position: 'relative',
-        }}
-      >
+      {/* Timeline */}
+      <div style={{ position: 'relative' }}>
         {/* Central vertical line */}
         <motion.div
           style={{
@@ -111,7 +101,6 @@ export default function Timeline() {
           return (
             <motion.div
               key={index}
-              className={`timeline-item ${isLeft ? 'left' : 'right'}`}
               style={{
                 display: 'flex',
                 justifyContent: isLeft ? 'flex-end' : 'flex-start',
@@ -159,57 +148,55 @@ export default function Timeline() {
 
               {/* Timeline content card */}
               <div
-                className="timeline-content"
                 style={{
-                  background: 'rgba(255,255,255,0.04)',
+                  background: 'rgba(255,255,255,0.03)',
                   backdropFilter: 'blur(12px)',
-                  border: '1px solid rgba(255,107,157,0.15)',
+                  WebkitBackdropFilter: 'blur(12px)',
+                  border: '1px solid rgba(255,107,157,0.12)',
                   borderRadius: '18px',
-                  padding: '24px',
-                  maxWidth: '340px',
+                  padding: '20px',
+                  maxWidth: '360px',
                   width: '100%',
                   boxShadow: '0 8px 32px rgba(0,0,0,0.2)',
-                  transition: 'transform 0.3s ease, box-shadow 0.3s ease',
                 }}
               >
-                {/* Image placeholder */}
-                <div
-                  className="timeline-image"
-                  style={{
-                    width: '100%',
-                    height: '200px',
-                    borderRadius: '12px',
-                    background: 'linear-gradient(135deg, rgba(255,107,157,0.1), rgba(192,132,252,0.1))',
-                    border: '1px dashed rgba(255,107,157,0.25)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: '1.1rem',
-                    color: '#c9a0b8',
-                    marginBottom: '18px',
-                    overflow: 'hidden',
-                  }}
-                >
-                  {item.image ? (
-                    <img
-                      src={item.image}
-                      alt={item.month}
+                {/* Photo grid */}
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: item.photos.length === 1 ? '1fr' : item.photos.length === 2 ? '1fr 1fr' : '1fr 1fr',
+                  gridTemplateRows: item.photos.length > 2 ? 'auto auto' : 'auto',
+                  gap: 6,
+                  marginBottom: 16,
+                  borderRadius: 12,
+                  overflow: 'hidden',
+                }}>
+                  {item.photos.map((photo, i) => (
+                    <div
+                      key={i}
                       style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                        borderRadius: '12px',
+                        overflow: 'hidden',
+                        borderRadius: 10,
+                        height: item.photos.length > 2 && i === 0 ? 170 : 130,
+                        gridColumn: item.photos.length === 3 && i === 0 ? '1 / -1' : 'auto',
                       }}
-                    />
-                  ) : (
-                    /* 🖼️ Replace with actual photo URL */
-                    <span>📷 Your Photo Here</span>
-                  )}
+                    >
+                      <img
+                        src={photo}
+                        alt={`${item.month} memory ${i + 1}`}
+                        loading="lazy"
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                          display: 'block',
+                        }}
+                      />
+                    </div>
+                  ))}
                 </div>
 
                 {/* Month label */}
                 <h3
-                  className="timeline-month"
                   style={{
                     fontSize: '1.3rem',
                     fontWeight: 700,
@@ -219,6 +206,9 @@ export default function Timeline() {
                     backgroundClip: 'text',
                     marginBottom: '8px',
                     letterSpacing: '0.5px',
+                    fontFamily: "'Playfair Display', serif",
+                    margin: 0,
+                    marginBottom: 6,
                   }}
                 >
                   {item.month}
@@ -226,13 +216,13 @@ export default function Timeline() {
 
                 {/* Caption */}
                 <p
-                  className="timeline-caption"
                   style={{
                     fontSize: '0.95rem',
                     color: '#d4a5c0',
                     lineHeight: 1.6,
                     fontStyle: 'italic',
                     margin: 0,
+                    fontFamily: "'Quicksand', sans-serif",
                   }}
                 >
                   {item.caption}

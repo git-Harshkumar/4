@@ -7,7 +7,7 @@ export default function GlobalEffects() {
   const [sparkleTrail, setSparkleTrail] = useState([]);
 
   // ─── Music Toggle ───
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
   const audioRef = useRef(null);
 
   // ─── Triple-Click Easter Egg ───
@@ -82,8 +82,33 @@ export default function GlobalEffects() {
   }, []);
 
   // ─────────────────────────────────────────────
-  // 4. MUSIC TOGGLE
+  // 4. MUSIC — auto-play on first user interaction
   // ─────────────────────────────────────────────
+  useEffect(() => {
+    const startMusic = () => {
+      if (audioRef.current) {
+        audioRef.current.play().catch(() => {});
+        setIsPlaying(true);
+      }
+      window.removeEventListener('click', startMusic);
+      window.removeEventListener('touchstart', startMusic);
+    };
+    window.addEventListener('click', startMusic);
+    window.addEventListener('touchstart', startMusic);
+    // Also try immediately (works if already interacted)
+    if (audioRef.current) {
+      audioRef.current.play().then(() => {
+        setIsPlaying(true);
+        window.removeEventListener('click', startMusic);
+        window.removeEventListener('touchstart', startMusic);
+      }).catch(() => {});
+    }
+    return () => {
+      window.removeEventListener('click', startMusic);
+      window.removeEventListener('touchstart', startMusic);
+    };
+  }, []);
+
   const toggleMusic = useCallback(() => {
     if (!audioRef.current) return;
     if (isPlaying) {
@@ -386,8 +411,8 @@ export default function GlobalEffects() {
       </AnimatePresence>
 
       {/* ── 4. MUSIC TOGGLE BUTTON ── */}
-      {/* 🎵 Replace src with your romantic song file, e.g., '/song.mp3' */}
-      <audio ref={audioRef} loop src="" />
+      {/* 🎵 "I Think They Call This Love" by Elliot James Reay */}
+      <audio ref={audioRef} loop src="/Elliot James Reay-01-I Think They Call This Love.mp3" />
       <motion.button
         onClick={toggleMusic}
         whileHover={{ scale: 1.1 }}
