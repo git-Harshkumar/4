@@ -204,7 +204,6 @@ export default function Timeline() {
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
                     backgroundClip: 'text',
-                    marginBottom: '8px',
                     letterSpacing: '0.5px',
                     fontFamily: "'Playfair Display', serif",
                     margin: 0,
